@@ -10,7 +10,7 @@
             justify-content: flex-start;
             align-items: flex-start;
             height: 65px;
-            background-color: #121212;
+            background-color: transparent;
             margin: 0;
             padding: 5px;
         }
@@ -32,6 +32,7 @@
             width: 50px;
             height: 50px;
             transition: 0.3s;
+            
         }
         .menu-btn:hover {
             background: linear-gradient(135deg, #bb86fc, #6200ea);
@@ -82,21 +83,24 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            
         }
     </style>
 </head>
 <body>
     <div class="menu-container" id="menuContainer">
-        <button class="menu-btn">⚒️</button>
+        <button title="Ai Tools" class="menu-btn" >⚒️</button>
         <div class="menu">
+            ||
+            ||
             <a href="https://chat.openai.com" target="_blank" title="ChatGPT">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">
             </a>
             <a href="https://gemini.google.com" target="_blank" title="Gemini AI">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Gemini_Logo.svg" alt="Gemini AI">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Gemini_Logo.svg">
             </a>
             <a href="https://deepseek.com" target="_blank" title="DeepSeek">
-                <img src="https://seeklogo.com/images/D/deepseek-logo-123456.png" alt="DeepSeek">
+                <img src="https://seeklogo.com/images/D/deepseek-logo-123456.png">
             </a>
         </div>
     </div>
