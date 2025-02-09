@@ -63,6 +63,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
+          	-webkit-filter: drop-shadow(0px 0px 0px rgba(255,255,255,0.80));
             transition: transform 0.2s;
         }
         .menu a:hover::after {
@@ -80,7 +81,8 @@
         }
         .menu a:hover {
             transform: scale(1.1);
-          
+           
+          -webkit-filter: drop-shadow(0px 0px 10px rgba(171, 235, 95, 0.8));
         }
         .menu img {
           
@@ -96,16 +98,16 @@
     <div class="menu-container" id="menuContainer">
         <button title="Ai Tools" class="menu-btn" >⚒️</button>
         <div class="menu">
-            <a href="https://chat.openai.com" target="_blank"title="ChatGPT">
+            <a href="https://chat.openai.com" target="_blank">
                 <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/openai.png">
             </a>
-            <a href="https://gemini.google.com" target="_blank" title="Gemini">
+            <a href="https://gemini.google.com" target="_blank" >
                 <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png">
             </a>
-            <a href="https://deepseek.com" target="_blank" title="DeepSeek">
+            <a href="https://deepseek.com" target="_blank" >
                 <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/deepseek-color.png">
           </a>
-          <a href="https://aistudio.google.com/prompts/new_chat" target="_blank" title="Gemini Pro" >
+          <a href="https://aistudio.google.com/prompts/new_chat" target="_blank"  >
                 <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/gemma-color.png">
           </a>
         </div>
