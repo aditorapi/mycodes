@@ -11,7 +11,7 @@
             align-items: flex-start;
             height: 65px;
             background-color: transparent;
-            margin: 0;
+            margin: 0px;
             padding: 5px;
         }
         .menu-container {
@@ -35,7 +35,7 @@
             
         }
         .menu-btn:hover {
-            background: linear-gradient(135deg, #bb86fc, #6200ea);
+            background: linear-gradient(135deg, #bb86fc, #6200ea); 
         }
         .menu {
             position: absolute;
@@ -44,6 +44,7 @@
             padding: 10px;
             display: flex;
             flex-direction: row;
+         
             gap: 15px;
             opacity: 0;
             visibility: hidden;
@@ -54,6 +55,7 @@
             opacity: 1;
             visibility: visible;
             transform: translateX(0);
+          
         }
         .menu a {
             text-decoration: none;
@@ -78,11 +80,14 @@
         }
         .menu a:hover {
             transform: scale(1.1);
+          
         }
         .menu img {
+          
             width: 40px;
             height: 40px;
             border-radius: 50%;
+          
             
         }
     </style>
@@ -91,16 +96,18 @@
     <div class="menu-container" id="menuContainer">
         <button title="Ai Tools" class="menu-btn" >⚒️</button>
         <div class="menu">
-            <a href="https://chat.openai.com" target="_blank" title="ChatGPT">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">
+            <a href="https://chat.openai.com" target="_blank"title="ChatGPT">
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/openai.png">
             </a>
-            <a href="https://gemini.google.com" target="_blank" title="Gemini AI">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Gemini_Logo.svg">
+            <a href="https://gemini.google.com" target="_blank" title="Gemini">
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png">
             </a>
             <a href="https://deepseek.com" target="_blank" title="DeepSeek">
-                <img src="https://seeklogo.com/images/D/deepseek-logo-123456.png">
-            </a>
-            <a class="gb_B" aria-label="Google apps" href="https://www.google.co.in/intl/en/about/products" aria-expanded="false" role="button" tabindex="0"><svg class="gb_F" focusable="false" viewBox="0 0 24 24"><path d="M6,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM16,6c0,1.1 0.9,2 2,2s2,-0.9 2,-2 -0.9,-2 -2,-2 -2,0.9 -2,2zM12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2z"></path><image src="https://ssl.gstatic.com/gb/images/bar/al-icon.png" alt="" height="24" width="24" style="border:none;display:none \9"></image></svg></a>
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/deepseek-color.png">
+          </a>
+          <a href="https://aistudio.google.com/prompts/new_chat" target="_blank" title="Gemini Pro" >
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/gemma-color.png">
+          </a>
         </div>
     </div>
     
