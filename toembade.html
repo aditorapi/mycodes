@@ -3,213 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Apps Menu</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>AI Tools Menu</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 0;
-            margin: 0;
-            height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 65px;
+            background-color: transparent;
+            margin: 0px;
+            padding: 5px;
+        }
+        .menu-container {
             position: relative;
-          background-color: transparent;
+            visibility: hidden;
         }
-
-        /* Container for the Google Apps button */
-        .apps-container {
-            position: absolute;  /* Absolute position */
-            top: 10px;
-            left: 10px;  /* Move the button to top-left corner */
-            z-index: 999;
-        }
-
-        /* The grid button (Google apps icon) */
-        .apps-btn {
-            background-color: #fff;
-            border: 3px solid #ccc;
-            border-radius: 50%;  /* Circular shape */
-            width: 40px;
-            height: 40px;
+        .menu-btn {
+            background: linear-gradient(135deg, #6200ea, #bb86fc);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Added drop shadow */
+            width: 50px;
+            height: 50px;
+            transition: 0.3s;
+            
         }
-
-        .apps-btn:focus {
-            outline: none;
+        .menu-btn:hover {
+            background: linear-gradient(135deg, #bb86fc, #6200ea); 
         }
-
-        .apps-btn:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Animation after button click */
-        .apps-btn.clicked {
-            transform: scale(0.95);
-            background-color: #f1f1f1;  /* Slightly lighter color on click */
-            border-radius: 8px;  /* Remove the circle background and turn into a square */
-        }
-
-        /* The hidden menu */
-        .apps-menu {
-            display: none;
-            position: fixed;
-            top: 50px;  /* Position the menu below the button */
-            left: 10px;  /* Align it to the left of the screen */
-            background-color: #fff;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);  /* Added drop shadow */
-            border-radius: 8px;
+        .menu {
+            position: absolute;
+            top: 0;
+            left: 60px;
             padding: 10px;
-            width: 300px;  /* Increased width */
-            max-height: 400px;  /* Fixed height with scrolling */
-            overflow-y: auto;  /* Enable scrolling if necessary */
-            z-index: 999;
-            grid-template-columns: repeat(3, 1fr);  /* Three columns layout */
-            display: grid;
-            gap: 10px;
-          visibility: hidden;
+            display: flex;
+            flex-direction: row;
+         
+            gap: 15px;
             opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s ease-in-out;
         }
-
-        /* When the menu is active, show it with animation */
-        .apps-menu.show {
-            display: grid;
+        .menu.active {
             opacity: 1;
-          visibility: visible;
-            transform: translateY(0);
+            visibility: visible;
+            transform: translateX(0);
           
         }
-
-        /* Grid of app icons */
-        .apps-menu a {
+        .menu a {
             text-decoration: none;
-            color: black;
-            text-align: center;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
             display: flex;
-            flex-direction: column;
             align-items: center;
-         
+            justify-content: center;
+            position: relative;
+          	-webkit-filter: drop-shadow(0px 0px 0px rgba(255,255,255,0.80));
+            transition: transform 0.2s;
         }
-
-        .apps-menu a:hover {
-            background-color: #f1f1f1;
-            transform: scale(1.05);
+        .menu a:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.8);
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            white-space: nowrap;
         }
-
-        /* Material Icons */
-        .material-icons {
-            font-size: 30px;
-            margin-bottom: 0px;
+        .menu a:hover {
+            transform: scale(1.1);
+           
+          -webkit-filter: drop-shadow(0px 0px 10px rgba(171, 235, 95, 0.8));
         }
-
-        /* Add color to each icon */
-        .apps-menu a:nth-child(1) .material-icons {
-            color: #4285F4;  /* Google Search - Blue */
+        .menu img {
+          
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          
+            
         }
-        .apps-menu a:nth-child(2) .material-icons {
-            color: #EA4335;  /* Gmail - Red */
-        }
-        .apps-menu a:nth-child(3) .material-icons {
-            color: #FBBC05;  /* Google Drive - Yellow */
-        }
-        .apps-menu a:nth-child(4) .material-icons {
-            color: #34A853;  /* YouTube - Green */
-        }
-        .apps-menu a:nth-child(5) .material-icons {
-            color: #0F9D58;  /* Google Maps - Green */
-        }
-        .apps-menu a:nth-child(6) .material-icons {
-            color: #DB4437;  /* Google Photos - Red */
-        }
-        .apps-menu a:nth-child(7) .material-icons {
-            color: #F4B400;  /* Google News - Yellow */
-        }
-        .apps-menu a:nth-child(8) .material-icons {
-            color: #4285F4;  /* Google Calendar - Blue */
-        }
-        .apps-menu a:nth-child(9) .material-icons {
-            color: #0F9D58;  /* Google Translate - Green */
-        }
-
     </style>
 </head>
 <body>
-
-    <!-- Google Apps Container -->
-    <div class="apps-container">
-        <!-- Google Apps Button (Grid icon) -->
-        <button class="apps-btn" onclick="toggleMenu(); handleClick();">
-            <span class="material-icons">apps</span>
-        </button>
+    <div class="menu-container" id="menuContainer">
+        <button title="Ai Tools" class="menu-btn" >⚒️</button>
+        <div class="menu">
+            <a href="https://chat.openai.com" target="_blank">
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/openai.png">
+            </a>
+            <a href="https://gemini.google.com" target="_blank" >
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/gemini-color.png">
+            </a>
+            <a href="https://deepseek.com" target="_blank" >
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/deepseek-color.png">
+          </a>
+          <a href="https://aistudio.google.com/prompts/new_chat" target="_blank"  >
+                <img src="https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/gemma-color.png">
+          </a>
+        </div>
     </div>
-
-    <!-- Google Apps Menu -->
-    <div class="apps-menu" id="appsMenu">
-        <a href="https://www.google.com/" target="_blank">
-            <span class="material-icons">search</span><br>Google Search
-        </a>
-        <a href="https://mail.google.com/" target="_blank">
-            <span class="material-icons">mail</span><br>Gmail
-        </a>
-        <a href="https://drive.google.com/" target="_blank">
-            <span class="material-icons">folder</span><br>Google Drive
-        </a>
-        <a href="https://www.youtube.com/" target="_blank">
-            <span class="material-icons">play_arrow</span><br>YouTube
-        </a>
-        <a href="https://maps.google.com/" target="_blank">
-            <span class="material-icons">map</span><br>Google Maps
-        </a>
-        <a href="https://photos.google.com/" target="_blank">
-            <span class="material-icons">photo</span><br>Google Photos
-        </a>
-        <a href="https://news.google.com/" target="_blank">
-            <span class="material-icons">rss_feed</span><br>Google News
-        </a>
-        <a href="https://calendar.google.com/" target="_blank">
-            <span class="material-icons">calendar_today</span><br>Google Calendar
-        </a>
-        <a href="https://translate.google.com/" target="_blank">
-            <span class="material-icons">language</span><br>Google Translate
-        </a>
-    </div>
-
-    <!-- JavaScript to toggle menu -->
+    
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('appsMenu');
-            menu.classList.toggle('show');
-        }
-
-        function handleClick() {
-            const button = document.querySelector('.apps-btn');
-            button.classList.add('clicked');  // Add click animation class
-            setTimeout(() => {
-                button.classList.remove('clicked');  // Remove click animation after animation ends
-            }, 300);  // Time duration of the animation
-        }
-
-        // Close the menu if clicked outside of it
-        window.addEventListener('click', function(event) {
-            const menu = document.getElementById('appsMenu');
-            const button = document.querySelector('.apps-btn');
-            if (!menu.contains(event.target) && !button.contains(event.target)) {
-                menu.classList.remove('show');
-            }
+        document.querySelector('.menu-btn').addEventListener('click', () => {
+            document.querySelector('.menu').classList.toggle('active');
         });
+        
+        window.onload = function() {
+            document.getElementById('menuContainer').style.visibility = 'visible';
+        }
     </script>
-
 </body>
 </html>
