@@ -3,60 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HTML, CSS & JavaScript Example</title>
+  <title>AI Tools Radial Menu</title>
   <style>
-    /* CSS styles go here */
+    /* Base page style */
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background-color: #f0f0f0;
       margin: 0;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
-
-    .container {
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      max-width: 600px;
-      margin: auto;
+    
+    /* Container for the menu */
+    .menu {
+      position: relative;
+      width: 60px;
+      height: 60px;
     }
-
-    h1 {
-      color: #333;
-    }
-
-    button {
-      background-color: #4caf50;
-      color: white;
-      padding: 10px 20px;
+    
+    /* Main button style */
+    .menu-toggle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #007bff;
+      color: #fff;
       border: none;
-      border-radius: 4px;
+      outline: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      position: relative;
     }
-
-    button:hover {
-      background-color: #45a049;
+    
+    .menu-toggle:hover {
+      background-color: #0056b3;
     }
-
-    p {
-      font-size: 18px;
+    
+    /* Tooltip for the main button */
+    .menu-toggle::after {
+      content: "Tools";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, top 0.3s ease;
+    }
+    
+    .menu-toggle:hover::after {
+      opacity: 1;
+      top: -40px;
+    }
+    
+    /* Style for the expanding menu items */
+    .menu-item {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      color: #333;
+      text-decoration: none;
+      font-size: 22px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    
+    /* When menu is open, make items visible */
+    .menu.open .menu-item {
+      opacity: 1;
+    }
+    
+    /* Position each menu item when the menu is open */
+    /* Note: the first child is the main button, so items start at nth-child(2) */
+    .menu.open .menu-item:nth-child(2) {  /* ChatGPT */
+      transform: translate(-70px, -70px);
+    }
+    .menu.open .menu-item:nth-child(3) {  /* Gemmini AI */
+      transform: translate(0, -100px);
+    }
+    .menu.open .menu-item:nth-child(4) {  /* DeepSeek */
+      transform: translate(70px, -70px);
+    }
+    
+    /* Custom tooltip for each menu item */
+    .menu-item::after {
+      content: attr(data-title);
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, bottom 0.3s ease;
+    }
+    
+    .menu-item:hover::after {
+      opacity: 1;
+      bottom: -45px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Hello, World!</h1>
-    <p>This is an example that combines HTML, CSS, and JavaScript all in one file.</p>
-    <button id="myButton">Click Me!</button>
-    <p id="displayText"></p>
+  <div class="menu" id="aiMenu">
+    <!-- Main button -->
+    <button class="menu-toggle" id="menuToggle">&#9881;</button>
+    <!-- Expanding menu items with icons and tooltips via data-title -->
+    <a href="https://chat.openai.com" class="menu-item" data-title="ChatGPT" target="_blank">
+      🤖
+    </a>
+    <a href="https://gemmini.ai" class="menu-item" data-title="Gemmini AI" target="_blank">
+      🚀
+    </a>
+    <a href="https://deepseek.ai" class="menu-item" data-title="DeepSeek" target="_blank">
+      🔍
+    </a>
   </div>
 
   <script>
-    // JavaScript code goes here
-    document.getElementById('myButton').addEventListener('click', function () {
-      document.getElementById('displayText').innerText = "You clicked the button!";
+    // Toggle the "open" class on the menu container to expand/collapse the items
+    const menuToggle = document.getElementById('menuToggle');
+    const aiMenu = document.getElementById('aiMenu');
+
+    menuToggle.addEventListener('click', function() {
+      aiMenu.classList.toggle('open');
     });
   </script>
 </body>
