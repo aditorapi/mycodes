@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BTEUP — Admit & Verification Card Downloader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f172a; /* deep navy */
+      --bg2: #0f3460; /* blue */
+      --card: rgba(255,255,255,0.06);
+      --muted: rgba(255,255,255,0.75);
+      --accent: #7c5cff;
+      --glass: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent), linear-gradient(120deg,var(--bg1),var(--bg2));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:920px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+    }
+
+    /* left area: info + form */
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius:18px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+    .brand{
+      display:flex;align-items:center;gap:14px;margin-bottom:6px;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3db2ff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#081826;box-shadow: 0 6px 20px rgba(124,92,255,0.18) inset;
+    }
+    h1{font-size:20px;margin:0 0 6px}
+    p.lead{color:var(--muted);margin:0 0 18px;font-size:14px}
+
+    .input-row{display:flex;gap:12px;align-items:center}
+    .input-wrap{flex:1}
+    input[type="text"]{
+      width:100%;padding:14px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;font-size:15px;outline:none;box-shadow: 0 6px 20px rgba(2,6,23,0.45) inset;
+    }
+    .hint{font-size:12px;color:rgba(255,255,255,0.6);margin-top:8px}
+
+    .actions{display:flex;gap:10px;margin-top:16px}
+    .btn{
+      flex:1;padding:12px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:600;font-size:14px;
+      display:inline-flex;gap:8px;align-items:center;justify-content:center;
+      background:linear-gradient(180deg,var(--accent), #4a3bff);color:white;box-shadow:0 8px 24px rgba(76,43,255,0.18);
+    }
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);box-shadow:none}
+    .btn:active{transform:translateY(1px)}
+
+    .tiny{font-size:13px;color:rgba(255,255,255,0.75);margin-top:12px}
+
+    /* right area: preview + credits */
+    .side{
+      display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;
+    }
+    .card-preview{
+      width:100%;max-width:420px;border-radius:14px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid var(--glass-border);
+    }
+    .card-head{display:flex;justify-content:space-between;align-items:center}
+    .card-title{font-weight:700;margin:0}
+    .card-sub{font-size:12px;color:var(--muted);margin-top:6px}
+
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .field{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;font-size:13px}
+
+    .footer-credit{width:100%;text-align:center;margin-top:6px;font-size:13px;color:rgba(255,255,255,0.8)}
+    .credit-link{color:#fff;text-decoration:none;font-weight:600}
+    .credit-sub{font-size:12px;color:rgba(255,255,255,0.65);margin-top:6px}
+
+    /* responsive */
+    @media (max-width:880px){
+      .container{grid-template-columns:1fr;}
+      .side{order:-1}
+    }
+
+    /* small helper */
+    .small-muted{font-size:12px;color:rgba(255,255,255,0.6)}
+    .logo-pill{display:inline-flex;gap:8px;align-items:center}
+    a.instagram{color:#fff;text-decoration:none;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="panel">
+      <div class="brand">
+        <div class="logo">BTE</div>
+        <div>
+          <h1>BTEUP Admit & Verification</h1>
+          <p class="lead">Enter your enrolment (roll) number below and open your official admit or verification card instantly from BTEUP.</p>
+        </div>
+      </div>
+
+      <div>
+        <label class="small-muted">Roll / Enrollment Number</label>
+        <div class="input-row">
+          <div class="input-wrap">
+            <input id="roll" type="text" inputmode="numeric" placeholder="e.g. 123456789012" />
+            <div class="hint">Only numbers. No spaces or special characters.</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="admitBtn" title="Open admit card in a new tab">
+            <!-- svg download icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Admit Card
+          </button>
+
+          <button class="btn" id="verifyBtn" title="Open verification card in a new tab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Verification Card
+          </button>
+        </div>
+
+        <div class="tiny">Tip: Cards open in a new tab so you don't lose this tool. Use your browser's print to save as PDF.</div>
+
+        <div style="margin-top:18px;display:flex;gap:10px;align-items:center;justify-content:flex-start">
+          <button id="copyBtn" class="btn secondary" style="width:auto;padding:10px 12px">Copy Roll</button>
+          <button id="clearBtn" class="btn secondary" style="width:auto;padding:10px 12px">Clear</button>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+          <div class="small-muted">Status:</div>
+          <div id="status" class="small-muted">Waiting for input</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="card-preview" aria-hidden>
+        <div class="card-head">
+          <div>
+            <div class="card-title">BTEUP — Student Card Preview</div>
+            <div class="card-sub">Preview only — real card served by bteup.ac.in</div>
+          </div>
+          <div class="logo-pill">
+            <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#3db2ff);display:flex;align-items:center;justify-content:center;color:#081826;font-weight:700">AD</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div style="font-size:13px;color:var(--muted)">Name</div>
+          <div style="font-weight:700;font-size:15px;margin-top:6px" id="previewName">—</div>
+
+          <div class="info-grid">
+            <div class="field">Roll: <span id="previewRoll">—</span></div>
+            <div class="field">Exam: <span id="previewExam">—</span></div>
+          </div>
+
+          <div style="margin-top:12px" class="small-muted">Open a card to see the official PDF or page from BTEUP's site.</div>
+        </div>
+      </div>
+
+      <div style="width:100%;max-width:420px;text-align:center">
+        <div class="footer-credit">
+          Created by <span style="font-weight:700">Aditya Prajapati</span><br>
+          <div class="credit-sub">Electronics Engineering — 2nd Year</div>
+          <div style="margin-top:8px"><a class="instagram" href="https://instagram.com/aditya_prajapati_9" target="_blank" rel="noopener">@aditya_prajapati_9</a></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+  const admitBtn = document.getElementById('admitBtn');
+  const verifyBtn = document.getElementById('verifyBtn');
+  const rollInput = document.getElementById('roll');
+  const status = document.getElementById('status');
+  const copyBtn = document.getElementById('copyBtn');
+  const clearBtn = document.getElementById('clearBtn');
+
+  const previewRoll = document.getElementById('previewRoll');
+  const previewName = document.getElementById('previewName');
+  const previewExam = document.getElementById('previewExam');
+
+  function sanitizeRoll(r){
+    if(!r) return '';
+    return r.replace(/\s+/g,'').replace(/[^0-9A-Za-z\-_.]/g,'');
+  }
+
+  function updatePreview(){
+    const r = sanitizeRoll(rollInput.value);
+    previewRoll.textContent = r || '—';
+    previewName.textContent = r ? 'Student' : '—';
+    previewExam.textContent = r ? '—' : '—';
+  }
+
+  rollInput.addEventListener('input', ()=>{
+    updatePreview();
+    status.textContent = 'Ready';
+  });
+
+  function openUrl(url){
+    // open in new tab
+    window.open(url, '_blank');
+  }
+
+  admitBtn.addEventListener('click', ()=>{
+    const r = sanitizeRoll(rollInput.value);
+    if(!r){
+      status.textContent = 'Enter a valid roll number!';
+      rollInput.focus();
+      return;
+    }
+    const url = `https://bteup.ac.in/ESeva/Student/AdmitCard.aspx?EnrollNumber=${encodeURIComponent(r)}`;
+    status.textContent = 'Opening admit card...';
+    openUrl(url);
+  });
+
+  verifyBtn.addEventListener('click', ()=>{
+    const r = sanitizeRoll(rollInput.value);
+    if(!r){
+      status.textContent = 'Enter a valid roll number!';
+      rollInput.focus();
+      return;
+    }
+    const url = `https://bteup.ac.in/ESeva/Student/verificationcard.aspx?EnrollNumber=${encodeURIComponent(r)}`;
+    status.textContent = 'Opening verification card...';
+    openUrl(url);
+  });
+
+  copyBtn.addEventListener('click', async ()=>{
+    const r = sanitizeRoll(rollInput.value);
+    if(!r) { status.textContent = 'Nothing to copy'; return; }
+    try{
+      await navigator.clipboard.writeText(r);
+      status.textContent = 'Roll copied to clipboard';
+    }catch(e){
+      status.textContent = 'Unable to copy — select and copy manually';
+    }
+  });
+
+  clearBtn.addEventListener('click', ()=>{
+    rollInput.value='';updatePreview();status.textContent='Cleared';rollInput.focus();
+  });
+
+  // keyboard: Enter opens admit card
+  rollInput.addEventListener('keydown',(e)=>{
+    if(e.key === 'Enter') admitBtn.click();
+  });
+
+  // init
+  updatePreview();
+</script>
+</body>
+</html>
