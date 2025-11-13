@@ -9,13 +9,12 @@
     :root{
       --bg1: #0f172a; /* deep navy */
       --bg2: #0f3460; /* blue */
-      --card: rgba(255,255,255,0.06);
-      --muted: rgba(255,255,255,0.75);
       --accent: #7c5cff;
-      --glass: rgba(255,255,255,0.06);
+      --muted: rgba(255,255,255,0.75);
       --glass-border: rgba(255,255,255,0.08);
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       min-height:100vh;
@@ -25,57 +24,58 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:40px 20px;
+      padding:28px 20px;
     }
 
     .container{
       width:100%;
-      max-width:920px;
+      max-width:1100px;
       display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:28px;
-      align-items:center;
+      grid-template-columns: 1fr 380px;
+      gap:24px;
+      align-items:start;
     }
 
-    /* left area: info + form */
+    /* Panel style */
     .panel{
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
       border-radius:18px;
-      padding:28px;
+      padding:22px;
       box-shadow: 0 10px 30px rgba(2,6,23,0.6);
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(6px) saturate(120%);
     }
-    .brand{
-      display:flex;align-items:center;gap:14px;margin-bottom:6px;
-    }
-    .logo{
-      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3db2ff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#081826;box-shadow: 0 6px 20px rgba(124,92,255,0.18) inset;
-    }
-    h1{font-size:20px;margin:0 0 6px}
-    p.lead{color:var(--muted);margin:0 0 18px;font-size:14px}
 
+    .brand{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3db2ff);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#081826;box-shadow: 0 6px 20px rgba(124,92,255,0.18) inset}
+    h1{font-size:20px;margin:0 0 6px}
+    p.lead{color:var(--muted);margin:0 0 12px;font-size:14px}
+
+    label.small-muted{font-size:13px;color:rgba(255,255,255,0.75);display:block;margin-bottom:8px}
     .input-row{display:flex;gap:12px;align-items:center}
     .input-wrap{flex:1}
+
     input[type="text"]{
       width:100%;padding:14px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;font-size:15px;outline:none;box-shadow: 0 6px 20px rgba(2,6,23,0.45) inset;
     }
+    input[type="text"]::placeholder{color:rgba(255,255,255,0.4)}
+
     .hint{font-size:12px;color:rgba(255,255,255,0.6);margin-top:8px}
 
     .actions{display:flex;gap:10px;margin-top:16px}
-    .btn{
-      flex:1;padding:12px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:600;font-size:14px;
-      display:inline-flex;gap:8px;align-items:center;justify-content:center;
-      background:linear-gradient(180deg,var(--accent), #4a3bff);color:white;box-shadow:0 8px 24px rgba(76,43,255,0.18);
-    }
+    .btn{flex:1;padding:12px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:600;font-size:14px;display:inline-flex;gap:8px;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--accent), #4a3bff);color:white;box-shadow:0 8px 24px rgba(76,43,255,0.18)}
     .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);box-shadow:none}
     .btn:active{transform:translateY(1px)}
 
     .tiny{font-size:13px;color:rgba(255,255,255,0.75);margin-top:12px}
 
-    /* right area: preview + credits */
-
-
+    /* right preview column */
+    .side{
+      display:flex;flex-direction:column;gap:12px;
+    }
+    .card-preview{
+      border-radius:14px;padding:18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);
+    }
     .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .field{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;font-size:13px}
 
@@ -88,47 +88,50 @@
       .side{order:-1}
     }
 
-    /* small helper */
     .small-muted{font-size:12px;color:rgba(255,255,255,0.6)}
-    .logo-pill{display:inline-flex;gap:8px;align-items:center}
     a.instagram{color:#fff;text-decoration:none;font-weight:600}
+
+    /* helper states */
+    #status{font-weight:600}
+    .error{color:#ff8a8a}
+    .ok{color:#b7ffcf}
   </style>
 </head>
 <body>
   <div class="container">
 
-    <div class="panel">
+    <!-- Left: main form -->
+    <div class="panel" aria-labelledby="pageTitle">
       <div class="brand">
         <div class="logo">BTE</div>
         <div>
-          <h1>BTEUP Admit & Verification</h1>
-          <p class="lead">Enter your enrolment (roll) number below and open your official admit or verification card instantly from BTEUP.</p>
+          <h1 id="pageTitle">BTEUP Admit & Verification</h1>
+          <p class="lead">Enter your enrollment number and open the official admit or verification card directly on BTEUP.</p>
         </div>
       </div>
 
       <div>
-        <label class="small-muted">Roll / Enrollment Number</label>
+        <label for="roll" class="small-muted">Roll / Enrollment Number</label>
         <div class="input-row">
           <div class="input-wrap">
-            <input id="roll" type="text" inputmode="numeric" placeholder="e.g. 123456789012" />
-            <div class="hint">Only numbers. No spaces or special characters.</div>
+            <!-- inputmode numeric helps mobile keyboards but we allow alphanumeric (letters often present in enrolment) -->
+            <input id="roll" type="text" inputmode="text" autocomplete="off" placeholder="e.g. E24441133000005" aria-label="Enrollment number" />
           </div>
         </div>
 
+        <div class="hint">Allowed characters: letters, numbers, dash and underscore. Spaces will be removed automatically.</div>
+
         <div class="actions">
           <button class="btn" id="admitBtn" title="Open admit card in a new tab">
-            <!-- svg download icon -->
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Admit Card
           </button>
 
           <button class="btn" id="verifyBtn" title="Open verification card in a new tab">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 11l4 4 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 21H3" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Verification Card
           </button>
         </div>
 
-        <div class="tiny">Tip: Cards open in a new tab so you don't lose this tool. Use your browser's print to save as PDF.</div>
+        <div class="tiny">Tip: Cards open in a new tab — use your browser's Print → Save as PDF to store the card.</div>
 
         <div style="margin-top:18px;display:flex;gap:10px;align-items:center;justify-content:flex-start">
           <button id="copyBtn" class="btn secondary" style="width:auto;padding:10px 12px">Copy Roll</button>
@@ -140,7 +143,7 @@
           <div id="status" class="small-muted">Waiting for input</div>
         </div>
 
-        <div class="footer-credit">
+        <div class="footer-credit" style="margin-top:14px;line-height:1.2">
           Created by <span style="font-weight:700">Aditya Prajapati</span><br>
           <div class="credit-sub">Electronics Engineering — 2nd Year</div>
           <div style="margin-top:8px"><a class="instagram" href="https://instagram.com/aditya_prajapati_9" target="_blank" rel="noopener">@aditya_prajapati_9</a></div>
@@ -149,88 +152,129 @@
       </div>
     </div>
 
+    <!-- Right: preview & info -->
+    <aside class="side">
+      <div class="card-preview" aria-hidden="true">
+        <strong>Live preview</strong>
+        <div class="info-grid">
+          <div class="field">Roll: <span id="previewRoll">—</span></div>
+          <div class="field">Name: <span id="previewName">—</span></div>
+          <div class="field">Exam: <span id="previewExam">—</span></div>
+          <div class="field">Status: <span id="previewStatus">—</span></div>
+        </div>
+      </div>
+
+      <div class="card-preview">
+        <strong>How it works</strong>
+        <p style="margin:8px 0 0;font-size:13px;color:rgba(255,255,255,0.78)">Type your enrollment number and click the button — the official BTEUP page will open in a new tab.</p>
+      </div>
+
+      <div class="card-preview small-muted">
+        Tip: If you want to allow only numbers (no letters) replace the sanitizer regex with: <code>const onlyDigits = value.replace(/\D+/g, '');</code>
+      </div>
+
+    </aside>
+
   </div>
 
 <script>
+(function(){
+  // Elements
   const admitBtn = document.getElementById('admitBtn');
   const verifyBtn = document.getElementById('verifyBtn');
   const rollInput = document.getElementById('roll');
-  const status = document.getElementById('status');
+  const statusEl = document.getElementById('status');
   const copyBtn = document.getElementById('copyBtn');
   const clearBtn = document.getElementById('clearBtn');
 
   const previewRoll = document.getElementById('previewRoll');
   const previewName = document.getElementById('previewName');
   const previewExam = document.getElementById('previewExam');
+  const previewStatus = document.getElementById('previewStatus');
 
-  function sanitizeRoll(r){
-    if(!r) return '';
-    return r.replace(/\s+/g,'').replace(/[^0-9A-Za-z\-_.]/g,'');
+  // Sanitizer: keep letters, numbers, dash and underscore. Remove spaces. Uppercase the value for consistency.
+  function sanitizeRoll(value){
+    if(!value) return '';
+    // remove spaces and control chars
+    let v = value.replace(/\s+/g, '');
+    // keep only allowed chars: A-Z a-z 0-9 - _
+    v = v.replace(/[^A-Za-z0-9-_]/g, '');
+    return v.toUpperCase();
   }
+
+  // If you want strictly numbers only, replace the sanitizer with this (example shown in UI):
+  // function sanitizeRoll(value){ return (value || '').replace(/\D+/g, ''); }
 
   function updatePreview(){
     const r = sanitizeRoll(rollInput.value);
     previewRoll.textContent = r || '—';
     previewName.textContent = r ? 'Student' : '—';
     previewExam.textContent = r ? '—' : '—';
+    previewStatus.textContent = r ? 'Ready' : '—';
   }
 
+  // keep the displayed input in sync with sanitized value while user types, but don't fight fast typing
+  let typingTimer = null;
   rollInput.addEventListener('input', ()=>{
+    clearTimeout(typingTimer);
+    // preview immediately with sanitized version for clarity (does not move caret if same length)
+    const sanitized = sanitizeRoll(rollInput.value);
+    // set value only if different to avoid jumping caret unnecessarily
+    if(rollInput.value !== sanitized) rollInput.value = sanitized;
     updatePreview();
-    status.textContent = 'Ready';
+    statusEl.textContent = 'Ready';
+    statusEl.className = '';
+    // small debounce to allow user to type
+    typingTimer = setTimeout(()=>{ updatePreview(); }, 250);
   });
 
-  function openUrl(url){
-    // open in new tab
-    window.open(url, '_blank');
+  function openUrlInNewTab(url){
+    try{
+      window.open(url, '_blank');
+    }catch(e){
+      console.error('Unable to open new tab', e);
+      statusEl.textContent = 'Unable to open new tab. Copy the link and open manually.';
+      statusEl.className = 'error';
+    }
   }
 
   admitBtn.addEventListener('click', ()=>{
     const r = sanitizeRoll(rollInput.value);
-    if(!r){
-      status.textContent = 'Enter a valid roll number!';
-      rollInput.focus();
-      return;
-    }
+    if(!r){ statusEl.textContent = 'Enter a valid roll number!'; statusEl.className='error'; rollInput.focus(); return; }
     const url = `https://bteup.ac.in/ESeva/Student/AdmitCard.aspx?EnrollNumber=${encodeURIComponent(r)}`;
-    status.textContent = 'Opening admit card...';
-    openUrl(url);
+    statusEl.textContent = 'Opening admit card...'; statusEl.className='';
+    openUrlInNewTab(url);
   });
 
   verifyBtn.addEventListener('click', ()=>{
     const r = sanitizeRoll(rollInput.value);
-    if(!r){
-      status.textContent = 'Enter a valid roll number!';
-      rollInput.focus();
-      return;
-    }
+    if(!r){ statusEl.textContent = 'Enter a valid roll number!'; statusEl.className='error'; rollInput.focus(); return; }
     const url = `https://bteup.ac.in/ESeva/Student/verificationcard.aspx?EnrollNumber=${encodeURIComponent(r)}`;
-    status.textContent = 'Opening verification card...';
-    openUrl(url);
+    statusEl.textContent = 'Opening verification card...'; statusEl.className='';
+    openUrlInNewTab(url);
   });
 
   copyBtn.addEventListener('click', async ()=>{
     const r = sanitizeRoll(rollInput.value);
-    if(!r) { status.textContent = 'Nothing to copy'; return; }
+    if(!r) { statusEl.textContent = 'Nothing to copy'; statusEl.className='error'; return; }
     try{
       await navigator.clipboard.writeText(r);
-      status.textContent = 'Roll copied to clipboard';
+      statusEl.textContent = 'Roll copied to clipboard'; statusEl.className='ok';
     }catch(e){
-      status.textContent = 'Unable to copy — select and copy manually';
+      statusEl.textContent = 'Unable to copy — select and copy manually'; statusEl.className='error';
     }
   });
 
   clearBtn.addEventListener('click', ()=>{
-    rollInput.value='';updatePreview();status.textContent='Cleared';rollInput.focus();
+    rollInput.value=''; updatePreview(); statusEl.textContent='Cleared'; statusEl.className=''; rollInput.focus();
   });
 
-  // keyboard: Enter opens admit card
-  rollInput.addEventListener('keydown',(e)=>{
-    if(e.key === 'Enter') admitBtn.click();
-  });
+  // Enter key opens admit card
+  rollInput.addEventListener('keydown',(e)=>{ if(e.key === 'Enter') admitBtn.click(); });
 
   // init
   updatePreview();
+})();
 </script>
 </body>
 </html>
